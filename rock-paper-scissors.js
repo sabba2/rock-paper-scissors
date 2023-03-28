@@ -31,29 +31,22 @@ function playRound(playerSelection, computerSelection) {
     return "Tie";
   }
 }
-// Create a game function that runs the previous function inside of it
-// Play a 5 round game
 
-// initialise playerTally, computerTally
-// Every round, the program should:
-// Ask user for input, convert to lower case, store in playerSelection
-// Generate computer input and store in computerSelection
-// Run playRound function
-// if win, add to win tally
-// if lose, add to lose tally
-// if tie, dont add to either tally
-// compare win and lose tally at the end and decide on victor
+// Create main game function
 
 function game() {
   let playerTally = 0;
   let computerTally = 0;
 
   for (i = 0; i < 5; i++) {
-    let playerSelection = prompt("Rock, Paper, scissors?").toLowerCase();
+    let playerSelection = promptUser();
     console.log(`You chose ${playerSelection}`);
+
     let computerSelection = getComputerChoice();
     console.log(`Computer chose ${computerSelection}`);
+
     let result = playRound(playerSelection, computerSelection);
+
     if (result === "You win!") {
       playerTally++;
       console.log("You win this round");
@@ -76,4 +69,16 @@ function game() {
   } else {
     console.log("You tied the game.");
   }
+}
+
+// create function that only takes rock, paper, scissors as input
+
+function promptUser() {
+  let value = prompt("Rock, Paper, Scissors?").toLowerCase();
+  while (value != "rock" && value != "paper" && value != "scissors") {
+    value = prompt(
+      "Please enter a valid choice. Rock, Paper, Scissors?"
+    ).toLowerCase();
+  }
+  return value;
 }
