@@ -1,3 +1,5 @@
+// Generate computer choice
+
 function getComputerChoice() {
   let num = Math.floor(Math.random() * 3);
   switch (num) {
@@ -10,17 +12,7 @@ function getComputerChoice() {
   }
 }
 
-let playerSelection = getComputerChoice(); // this will be made into an input
-let computerSelection = getComputerChoice();
-console.log(playerSelection);
-console.log(computerSelection);
-
-// Take input from user
-// Compare with computer selection
-// if playerSelection is rock and computerSelection is scissors, you win
-// if playerSelection is rock and computerSelection is paper, you lose
-// if playerSelection and computerSelection are equal, tie
-// etc
+// Play a round of rock paper scissors
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "rock" && computerSelection === "scissors") {
@@ -37,5 +29,51 @@ function playRound(playerSelection, computerSelection) {
     return "You win!";
   } else {
     return "Tie";
+  }
+}
+// Create a game function that runs the previous function inside of it
+// Play a 5 round game
+
+// initialise playerTally, computerTally
+// Every round, the program should:
+// Ask user for input, convert to lower case, store in playerSelection
+// Generate computer input and store in computerSelection
+// Run playRound function
+// if win, add to win tally
+// if lose, add to lose tally
+// if tie, dont add to either tally
+// compare win and lose tally at the end and decide on victor
+
+function game() {
+  let playerTally = 0;
+  let computerTally = 0;
+
+  for (i = 0; i < 5; i++) {
+    let playerSelection = prompt("Rock, Paper, scissors?").toLowerCase();
+    console.log(`You chose ${playerSelection}`);
+    let computerSelection = getComputerChoice();
+    console.log(`Computer chose ${computerSelection}`);
+    let result = playRound(playerSelection, computerSelection);
+    if (result === "You win!") {
+      playerTally++;
+      console.log("You win this round");
+    } else if (result === "You lose!") {
+      computerTally++;
+      console.log("You lost this round");
+    } else {
+      console.log("You tied this round.");
+    }
+  }
+
+  console.log(
+    `----- Score ----- \nPlayer: ${playerTally} Computer: ${computerTally}`
+  );
+
+  if (playerTally > computerTally) {
+    console.log("You won the game!");
+  } else if (playerTally < computerTally) {
+    console.log("You lost the game!");
+  } else {
+    console.log("You tied the game.");
   }
 }
