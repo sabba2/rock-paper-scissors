@@ -14,62 +14,66 @@ function getComputerChoice() {
 
 // Play a round of rock paper scissors
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+  computerSelection = getComputerChoice();
+  console.log(`You chose ${playerSelection}`);
+  console.log(`Computer chose ${computerSelection}`);
   if (playerSelection === "rock" && computerSelection === "scissors") {
-    return "You win!";
+    console.log("You win!");
   } else if (playerSelection === "rock" && computerSelection === "paper") {
-    return "You lose";
+    console.log("You lose");
   } else if (playerSelection === "paper" && computerSelection === "rock") {
-    return "You win!";
+    console.log("You win!");
   } else if (playerSelection === "paper" && computerSelection === "scissors") {
-    return "You lose";
+    console.log("You lose");
   } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    return "You lose";
+    console.log("You lose");
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
-    return "You win!";
+    console.log("You win!");
   } else {
-    return "Tie";
+    console.log("Tie");
+    return "cats";
   }
 }
 
 // Create main game function
 
-function game() {
-  let playerTally = 0;
-  let computerTally = 0;
+// function game() {
+//   let playerTally = 0;
+//   let computerTally = 0;
 
-  for (i = 0; i < 5; i++) {
-    let playerSelection = promptUser();
-    console.log(`You chose ${playerSelection}`);
+//   for (i = 0; i < 5; i++) {
+//     let playerSelection = promptUser();
+//     console.log(`You chose ${playerSelection}`);
 
-    let computerSelection = getComputerChoice();
-    console.log(`Computer chose ${computerSelection}`);
+//     let computerSelection = getComputerChoice();
+//     console.log(`Computer chose ${computerSelection}`);
 
-    let result = playRound(playerSelection, computerSelection);
+//     let result = playRound(playerSelection, computerSelection);
 
-    if (result === "You win!") {
-      playerTally++;
-      console.log("You win this round");
-    } else if (result === "You lose!") {
-      computerTally++;
-      console.log("You lost this round");
-    } else {
-      console.log("You tied this round.");
-    }
-  }
+//     if (result === "You win!") {
+//       playerTally++;
+//       console.log("You win this round");
+//     } else if (result === "You lose!") {
+//       computerTally++;
+//       console.log("You lost this round");
+//     } else {
+//       console.log("You tied this round.");
+//     }
+//   }
 
-  console.log(
-    `----- Score ----- \nPlayer: ${playerTally} Computer: ${computerTally}`
-  );
+//   console.log(
+//     `----- Score ----- \nPlayer: ${playerTally} Computer: ${computerTally}`
+//   );
 
-  if (playerTally > computerTally) {
-    console.log("You won the game!");
-  } else if (playerTally < computerTally) {
-    console.log("You lost the game!");
-  } else {
-    console.log("You tied the game.");
-  }
-}
+//   if (playerTally > computerTally) {
+//     console.log("You won the game!");
+//   } else if (playerTally < computerTally) {
+//     console.log("You lost the game!");
+//   } else {
+//     console.log("You tied the game.");
+//   }
+// }
 
 // create function that only takes rock, paper, scissors as input
 
@@ -82,3 +86,19 @@ function promptUser() {
   }
   return value;
 }
+
+const rock = document.querySelector("button.rock");
+const paper = document.querySelector("button.paper");
+const scissors = document.querySelector("button.scissors");
+
+rock.addEventListener("click", () => {
+  playRound("rock");
+});
+
+paper.addEventListener("click", () => {
+  playRound("paper");
+});
+
+scissors.addEventListener("click", () => {
+  playRound("scissors");
+});
