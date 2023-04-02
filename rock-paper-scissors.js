@@ -1,41 +1,3 @@
-// Generate computer choice
-
-function getComputerChoice() {
-  let num = Math.floor(Math.random() * 3);
-  switch (num) {
-    case 0:
-      return "rock";
-    case 1:
-      return "paper";
-    case 2:
-      return "scissors";
-  }
-}
-
-// Play a round of rock paper scissors
-
-function playRound(playerSelection) {
-  computerSelection = getComputerChoice();
-  console.log(`You chose ${playerSelection}`);
-  console.log(`Computer chose ${computerSelection}`);
-  if (playerSelection === "rock" && computerSelection === "scissors") {
-    console.log("You win!");
-  } else if (playerSelection === "rock" && computerSelection === "paper") {
-    console.log("You lose");
-  } else if (playerSelection === "paper" && computerSelection === "rock") {
-    console.log("You win!");
-  } else if (playerSelection === "paper" && computerSelection === "scissors") {
-    console.log("You lose");
-  } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    console.log("You lose");
-  } else if (playerSelection === "scissors" && computerSelection === "paper") {
-    console.log("You win!");
-  } else {
-    console.log("Tie");
-    return "cats";
-  }
-}
-
 // Create main game function
 
 // function game() {
@@ -75,21 +37,17 @@ function playRound(playerSelection) {
 //   }
 // }
 
-// create function that only takes rock, paper, scissors as input
-
-function promptUser() {
-  let value = prompt("Rock, Paper, Scissors?").toLowerCase();
-  while (value != "rock" && value != "paper" && value != "scissors") {
-    value = prompt(
-      "Please enter a valid choice. Rock, Paper, Scissors?"
-    ).toLowerCase();
-  }
-  return value;
-}
-
 const rock = document.querySelector("button.rock");
 const paper = document.querySelector("button.paper");
 const scissors = document.querySelector("button.scissors");
+const wins = document.querySelector(".wins");
+const losses = document.querySelector(".losses");
+const winner = document.querySelector(".winner");
+const ties = document.querySelector(".ties");
+let winCounter = 0;
+let lossCounter = 0;
+let tieCounter = 0;
+// need to displayh win/loss counter
 
 rock.addEventListener("click", () => {
   playRound("rock");
@@ -102,3 +60,67 @@ paper.addEventListener("click", () => {
 scissors.addEventListener("click", () => {
   playRound("scissors");
 });
+
+// Play a round of rock paper scissors
+
+function playRound(playerSelection) {
+  computerSelection = getComputerChoice();
+  console.log(`You chose ${playerSelection}`);
+  console.log(`Computer chose ${computerSelection}`);
+
+  if (winCounter >= 5 || lossCounter >= 5) return;
+
+  if (
+    (playerSelection === "rock" && computerSelection === "scissors") ||
+    (playerSelection === "paper" && computerSelection === "rock") ||
+    (playerSelection === "scissors" && computerSelection === "paper")
+  ) {
+    winCounter += 1;
+    wins.textContent = winCounter;
+  } else if (
+    (playerSelection === "rock" && computerSelection === "paper") ||
+    (playerSelection === "paper" && computerSelection === "scissors") ||
+    (playerSelection === "scissors" && computerSelection === "rock")
+  ) {
+    lossCounter += 1;
+    losses.textContent = lossCounter;
+  } else {
+    console.log("Tie");
+    tieCounter += 1;
+    ties.textContent = tieCounter;
+  }
+  if (winCounter >= 5) {
+    winner.textContent = "You win!";
+    return;
+  }
+  if (lossCounter >= 5) {
+    winner.textContent = "Computer wins!";
+    return;
+  }
+}
+
+// Generate computer choice
+
+function getComputerChoice() {
+  let num = Math.floor(Math.random() * 3);
+  switch (num) {
+    case 0:
+      return "rock";
+    case 1:
+      return "paper";
+    case 2:
+      return "scissors";
+  }
+}
+
+// create prompt function that only takes rock, paper, scissors as input
+
+function promptUser() {
+  let value = prompt("Rock, Paper, Scissors?").toLowerCase();
+  while (value != "rock" && value != "paper" && value != "scissors") {
+    value = prompt(
+      "Please enter a valid choice. Rock, Paper, Scissors?"
+    ).toLowerCase();
+  }
+  return value;
+}
