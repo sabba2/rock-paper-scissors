@@ -1,0 +1,35 @@
+.btn-container {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0 0 0;
+  margin-bottom: 15px;
+}
+
+.rock,
+.paper,
+.scissors {
+  margin: 20px;
+}
+
+.rock img,
+.paper img,
+.scissors img {
+  height: 150px;
+  width: auto;
+}
+
+.results {
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 24px;
+}
+
+.reset {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.reset button {
+  font-size: 24px;
+  font-family: Helvetica, Arial, sans-serif;
+}

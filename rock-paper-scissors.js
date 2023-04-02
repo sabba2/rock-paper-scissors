@@ -1,42 +1,3 @@
-// Create main game function
-
-// function game() {
-//   let playerTally = 0;
-//   let computerTally = 0;
-
-//   for (i = 0; i < 5; i++) {
-//     let playerSelection = promptUser();
-//     console.log(`You chose ${playerSelection}`);
-
-//     let computerSelection = getComputerChoice();
-//     console.log(`Computer chose ${computerSelection}`);
-
-//     let result = playRound(playerSelection, computerSelection);
-
-//     if (result === "You win!") {
-//       playerTally++;
-//       console.log("You win this round");
-//     } else if (result === "You lose!") {
-//       computerTally++;
-//       console.log("You lost this round");
-//     } else {
-//       console.log("You tied this round.");
-//     }
-//   }
-
-//   console.log(
-//     `----- Score ----- \nPlayer: ${playerTally} Computer: ${computerTally}`
-//   );
-
-//   if (playerTally > computerTally) {
-//     console.log("You won the game!");
-//   } else if (playerTally < computerTally) {
-//     console.log("You lost the game!");
-//   } else {
-//     console.log("You tied the game.");
-//   }
-// }
-
 const rock = document.querySelector("button.rock");
 const paper = document.querySelector("button.paper");
 const scissors = document.querySelector("button.scissors");
@@ -44,10 +5,10 @@ const wins = document.querySelector(".wins");
 const losses = document.querySelector(".losses");
 const winner = document.querySelector(".winner");
 const ties = document.querySelector(".ties");
+const reset = document.querySelector(".reset");
 let winCounter = 0;
 let lossCounter = 0;
 let tieCounter = 0;
-// need to displayh win/loss counter
 
 rock.addEventListener("click", () => {
   playRound("rock");
@@ -61,7 +22,7 @@ scissors.addEventListener("click", () => {
   playRound("scissors");
 });
 
-// Play a round of rock paper scissors
+reset.addEventListener("click", resetGame);
 
 function playRound(playerSelection) {
   computerSelection = getComputerChoice();
@@ -77,6 +38,7 @@ function playRound(playerSelection) {
   ) {
     winCounter += 1;
     wins.textContent = winCounter;
+    winner.textContent = `You chose ${playerSelection}. Computer chose ${computerSelection}. You win this round!`;
   } else if (
     (playerSelection === "rock" && computerSelection === "paper") ||
     (playerSelection === "paper" && computerSelection === "scissors") ||
@@ -84,22 +46,22 @@ function playRound(playerSelection) {
   ) {
     lossCounter += 1;
     losses.textContent = lossCounter;
+    winner.textContent = `You chose ${playerSelection}. Computer chose ${computerSelection}. You lose this round.`;
   } else {
     console.log("Tie");
     tieCounter += 1;
     ties.textContent = tieCounter;
+    winner.textContent = `You chose ${playerSelection}. Computer chose ${computerSelection}. You tied this round.`;
   }
   if (winCounter >= 5) {
-    winner.textContent = "You win!";
+    winner.textContent = "You won!";
     return;
   }
   if (lossCounter >= 5) {
-    winner.textContent = "Computer wins!";
+    winner.textContent = "Computer won!";
     return;
   }
 }
-
-// Generate computer choice
 
 function getComputerChoice() {
   let num = Math.floor(Math.random() * 3);
@@ -113,8 +75,6 @@ function getComputerChoice() {
   }
 }
 
-// create prompt function that only takes rock, paper, scissors as input
-
 function promptUser() {
   let value = prompt("Rock, Paper, Scissors?").toLowerCase();
   while (value != "rock" && value != "paper" && value != "scissors") {
@@ -123,4 +83,14 @@ function promptUser() {
     ).toLowerCase();
   }
   return value;
+}
+
+function resetGame() {
+  wins.textContent = 0;
+  winCounter = 0;
+  losses.textContent = 0;
+  lossCounter = 0;
+  ties.textContent = 0;
+  tieCounter = 0;
+  winner.textContent = "";
 }
